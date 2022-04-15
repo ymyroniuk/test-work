@@ -1,16 +1,14 @@
 version: '3.1'
 services:
   test.work:
-    image: test-work:latest
-    container_name: test-work
+    build: .
     restart: always
     ports:
-      - 3000:3000
+      - 5000:5000
     volumes:
       - ./.env:/opts/app/.env
   mongo:
     image: mongo:latest
-    container_name: mongo
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
@@ -18,4 +16,6 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./mongo-data:/data/db
+      - mongo-data:/data/db
+volumes: 
+  mongo-data:
